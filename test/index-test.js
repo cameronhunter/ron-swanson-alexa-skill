@@ -1,32 +1,13 @@
 import test from 'ava';
-import { handler as Skill } from '..';
 import Request from 'alexa-request';
+import { handler as Skill } from '..';
 
 test('LaunchRequest', t => {
-  const event = Request.launchRequest().build();
-
-  return Skill(event).then(response => {
-    t.deepEqual(response, {
-      version: '1.0',
-      response: {
-        shouldEndSession: true,
-        outputSpeech: { type: 'PlainText', text: 'Ronswanson launched!' }
-      }
-    });
-  });
+  const request = Request.launchRequest().build();
+  return Skill(request).then(response => t.ok(response));
 });
 
-test('Hello intent', t => {
-  const event = Request.intent('hello', { name: 'world' }).build();
-
-  return Skill(event).then(response => {
-    t.deepEqual(response, {
-      version: '1.0',
-      response: {
-        shouldEndSession: true,
-        outputSpeech: { type: 'PlainText', text: 'Hello world' },
-        card: { type: 'Simple', title: 'Ronswanson', content: 'Hello world' }
-      }
-    });
-  });
+test('Quote intent', t => {
+  const request = Request.intent('quote').build();
+  return Skill(request).then(response => t.ok(response));
 });

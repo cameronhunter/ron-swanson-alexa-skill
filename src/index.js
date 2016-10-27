@@ -1,3 +1,3 @@
-import Ronswanson from './ron-swanson';
+import RonSwanson from './ron-swanson';
 
-module.exports = Ronswanson;
+module.exports = RonSwanson;
